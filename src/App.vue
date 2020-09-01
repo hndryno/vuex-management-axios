@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <p v-for="(item, index) in posts" :key="index">{{item.title}}</p>
+    <!-- <router-view/> -->
   </div>
 </template>
 
@@ -30,3 +27,23 @@
   }
 }
 </style>
+
+<script>
+import { mapActions, mapState } from 'vuex'
+export default {
+  name: 'App',
+  computed: {
+    ...mapState([
+      'posts'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'loadPost'
+    ])
+  },
+  mounted () {
+    this.loadPost()
+  }
+}
+</script>
